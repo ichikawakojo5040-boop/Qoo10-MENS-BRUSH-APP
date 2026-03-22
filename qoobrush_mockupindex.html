@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>QooBrush — アプリ画面モックアップ</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f0ede8;
+    --dark: #1c1c1e;
+    --mid: #6b6b6b;
+    --light: #c8b99a;
+    --accent: #2e4057;
+    --white: #ffffff;
+    --phone-w: 280px;
+    --phone-h: 560px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--bg);
+    color: var(--dark);
+    padding: 40px 20px 60px;
+  }
+
+  .page-title {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  .page-title h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    letter-spacing: 0.02em;
+    color: var(--dark);
+  }
+  .page-title p {
+    font-size: 11px;
+    color: var(--mid);
+    letter-spacing: 0.12em;
+    margin-top: 4px;
+    text-transform: uppercase;
+  }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--light);
+    text-align: center;
+    margin: 40px 0 16px;
+    text-transform: uppercase;
+  }
+
+  .screens-row {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .screen-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .screen-caption {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--mid);
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  /* ── Phone shell ── */
+  .phone {
+    width: var(--phone-w);
+    height: var(--phone-h);
+    background: var(--dark);
+    border-radius: 36px;
+    padding: 10px;
+    box-shadow:
+      0 0 0 1px #444,
+      0 20px 60px rgba(0,0,0,0.3),
+      inset 0 0 0 1px #333;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .phone-notch {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70px;
+    height: 20px;
+    background: var(--dark);
+    border-radius: 0 0 14px 14px;
+    z-index: 10;
+  }
+  .phone-screen {
+    width: 100%;
+    height: 100%;
+    background: var(--white);
+    border-radius: 28px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* ── Status bar ── */
+  .status-bar {
+    height: 28px;
+    background: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 16px 0;
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--dark);
+    position: relative;
+    z-index: 5;
+  }
+
+  /* ── Nav bar ── */
+  .nav-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 56px;
+    background: var(--white);
+    border-top: 1px solid #f0ede8;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 8px 8px;
+    z-index: 10;
+  }
+  .nav-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    font-size: 8px;
+    color: #aaa;
+    cursor: pointer;
+  }
+  .nav-icon.active { color: var(--accent); }
+  .nav-icon svg { width: 20px; height: 20px; }
+
+  /* ══ SCREEN 1: LP TOP ══ */
+  .s1-hero {
+    height: 200px;
+    background: linear-gradient(160deg, var(--accent) 0%, #1a2e40 60%, #0d1d2b 100%);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 16px;
+  }
+  .s1-hero-grid {
+    position: absolute;
+    inset: 0;
+    opacity: 0.08;
+    background-image: repeating-linear-gradient(0deg, #fff 0px, transparent 1px, transparent 28px),
+                      repeating-linear-gradient(90deg, #fff 0px, transparent 1px, transparent 28px);
+  }
+  .s1-badge {
+    display: inline-block;
+    background: var(--light);
+    color: var(--dark);
+    font-size: 8px;
+    font-weight: 700;
+    padding: 3px 8px;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+    width: fit-content;
+  }
+  .s1-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: white;
+    line-height: 1.2;
+  }
+  .s1-sub { font-size: 9px; color: rgba(255,255,255,0.6); margin-top: 4px; }
+
+  .s1-content { padding: 12px 14px; background: white; }
+  .s1-honma {
+    background: #f8f6f2;
+    border-left: 3px solid var(--light);
+    padding: 8px 10px;
+    margin-bottom: 10px;
+    font-size: 8.5px;
+    color: var(--mid);
+    line-height: 1.7;
+  }
+  .s1-honma strong { color: var(--accent); font-size: 9px; }
+
+  .s1-genre-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .genre-chip {
+    background: var(--accent);
+    color: white;
+    font-size: 8px;
+    font-weight: 700;
+    text-align: center;
+    padding: 7px 4px;
+    border-radius: 4px;
+  }
+  .genre-chip.g2 { background: #c8b99a; color: var(--dark); }
+  .genre-chip.g3 { background: #4a6741; }
+
+  .s1-cta {
+    display: block;
+    background: var(--accent);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    text-align: center;
+    padding: 10px;
+    margin-top: 12px;
+    letter-spacing: 0.06em;
+  }
+
+  /* ══ SCREEN 2: 商品キュレーション ══ */
+  .s2-header {
+    padding: 8px 14px 6px;
+    border-bottom: 1px solid #f0ede8;
+  }
+  .s2-header-title { font-size: 13px; font-weight: 700; color: var(--dark); }
+  .s2-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid #eee;
+    padding: 0 14px;
+  }
+  .s2-tab {
+    font-size: 9px;
+    font-weight: 700;
+    padding: 7px 10px;
+    color: #aaa;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+  }
+  .s2-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  .s2-section-label {
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--light);
+    padding: 8px 14px 4px;
+    text-transform: uppercase;
+  }
+
+  .s2-product-list { padding: 0 14px; overflow-y: auto; max-height: 330px; }
+  .product-card {
+    display: flex;
+    gap: 10px;
+    padding: 9px 0;
+    border-bottom: 1px solid #f0ede8;
+    align-items: center;
+  }
+  .product-img {
+    width: 52px;
+    height: 52px;
+    background: #f0ede8;
+    border-radius: 6px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+  }
+  .product-info { flex: 1; min-width: 0; }
+  .product-name { font-size: 9px; font-weight: 700; color: var(--dark); margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .product-desc { font-size: 8px; color: var(--mid); line-height: 1.5; }
+  .product-price { font-size: 11px; font-weight: 700; color: var(--accent); margin-top: 3px; }
+  .product-tag {
+    font-size: 7px;
+    background: #e8f0e0;
+    color: #4a6741;
+    padding: 2px 5px;
+    font-weight: 700;
+    border-radius: 2px;
+    margin-left: 4px;
+  }
+  .product-btn {
+    font-size: 8px;
+    background: var(--accent);
+    color: white;
+    padding: 5px 8px;
+    flex-shrink: 0;
+    font-weight: 700;
+    border-radius: 3px;
+  }
+
+  /* ══ SCREEN 3: メガ割投票 ══ */
+  .s3-hero {
+    background: #1a2e40;
+    padding: 14px;
+    color: white;
+  }
+  .s3-hero-label { font-size: 8px; color: var(--light); letter-spacing: 0.15em; font-weight: 700; }
+  .s3-hero-title { font-family: 'DM Serif Display', serif; font-size: 18px; margin-top: 2px; }
+  .s3-hero-sub { font-size: 8px; color: rgba(255,255,255,0.6); margin-top: 3px; }
+  .s3-timer {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .s3-timer-unit {
+    background: rgba(255,255,255,0.1);
+    padding: 5px 8px;
+    text-align: center;
+    border-radius: 4px;
+  }
+  .s3-timer-val { font-size: 14px; font-weight: 700; color: var(--light); display: block; line-height: 1; }
+  .s3-timer-label { font-size: 7px; color: rgba(255,255,255,0.5); }
+
+  .s3-content { padding: 10px 14px; overflow-y: auto; max-height: 290px; }
+  .vote-card {
+    border: 1px solid #e8e4dd;
+    border-radius: 6px;
+    padding: 9px;
+    margin-bottom: 8px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .vote-card.voted { border-color: var(--accent); background: #f0f4f8; }
+  .vote-img {
+    width: 44px;
+    height: 44px;
+    background: #f0ede8;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .vote-info { flex: 1; }
+  .vote-name { font-size: 9px; font-weight: 700; color: var(--dark); margin-bottom: 3px; }
+  .vote-bar-wrap { height: 5px; background: #eee; border-radius: 3px; overflow: hidden; }
+  .vote-bar-fill { height: 100%; background: var(--accent); border-radius: 3px; }
+  .vote-count { font-size: 8px; color: var(--mid); margin-top: 2px; }
+  .vote-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1.5px solid var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 11px;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .vote-btn.voted-btn { background: var(--accent); color: white; }
+
+  .s3-coupon {
+    background: linear-gradient(135deg, var(--light) 0%, #d4c5a9 100%);
+    margin: 0 14px 10px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 9px;
+    color: var(--dark);
+  }
+  .s3-coupon strong { font-size: 12px; }
+
+  /* ══ SCREEN 4: SNS / チャレンジ ══ */
+  .s4-header {
+    padding: 8px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #f0ede8;
+  }
+  .s4-title { font-size: 12px; font-weight: 700; }
+  .s4-new-btn {
+    font-size: 8px;
+    background: var(--accent);
+    color: white;
+    padding: 4px 9px;
+    font-weight: 700;
+    border-radius: 3px;
+  }
+
+  .s4-challenge-banner {
+    background: linear-gradient(120deg, #1a2e40 0%, #2e4057 100%);
+    margin: 8px 14px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    color: white;
+  }
+  .s4-chall-label { font-size: 8px; color: var(--light); font-weight: 700; letter-spacing: 0.1em; }
+  .s4-chall-title { font-size: 12px; font-weight: 700; margin-top: 2px; }
+  .s4-chall-sub { font-size: 8px; color: rgba(255,255,255,0.6); margin-top: 2px; }
+  .s4-chall-btn {
+    display: inline-block;
+    background: var(--light);
+    color: var(--dark);
+    font-size: 8px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 3px;
+    margin-top: 8px;
+  }
+
+  .s4-feed { padding: 0 14px; overflow-y: auto; max-height: 300px; }
+  .feed-card {
+    padding: 10px 0;
+    border-bottom: 1px solid #f0ede8;
+  }
+  .feed-user { display: flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .feed-avatar {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; color: white; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .feed-name { font-size: 9px; font-weight: 700; color: var(--dark); }
+  .feed-tag { font-size: 7.5px; color: var(--mid); }
+  .feed-text { font-size: 9px; color: var(--dark); line-height: 1.6; margin-bottom: 5px; }
+  .feed-stats { display: flex; gap: 10px; font-size: 8px; color: var(--mid); }
+
+  /* ══ SCREEN 5: 商品詳細 ══ */
+  .s5-img {
+    height: 160px;
+    background: linear-gradient(135deg, #f0ede8 0%, #e8e0d4 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 60px;
+    position: relative;
+  }
+  .s5-badge {
+    position: absolute;
+    top: 10px; left: 10px;
+    background: var(--accent);
+    color: white;
+    font-size: 8px;
+    font-weight: 700;
+    padding: 3px 8px;
+    letter-spacing: 0.06em;
+  }
+  .s5-content { padding: 12px 14px; overflow-y: auto; max-height: 240px; }
+  .s5-brand { font-size: 8px; color: var(--mid); letter-spacing: 0.1em; font-weight: 700; text-transform: uppercase; }
+  .s5-name { font-size: 14px; font-weight: 700; color: var(--dark); margin-top: 2px; line-height: 1.3; }
+  .s5-price-row { display: flex; align-items: baseline; gap: 6px; margin-top: 6px; }
+  .s5-price { font-size: 18px; font-weight: 700; color: var(--accent); }
+  .s5-orig { font-size: 11px; color: var(--mid); text-decoration: line-through; }
+  .s5-disc { font-size: 10px; font-weight: 700; color: #d04a3b; background: #fde8e6; padding: 1px 5px; }
+  .s5-tags { display: flex; flex-wrap: wrap; gap: 4px; margin: 8px 0; }
+  .s5-tag { font-size: 8px; background: #f0ede8; color: var(--mid); padding: 3px 7px; border-radius: 2px; }
+  .s5-desc { font-size: 9px; color: var(--mid); line-height: 1.7; margin-bottom: 8px; }
+  .s5-beginner {
+    background: #f0f4f8;
+    border-left: 2px solid var(--accent);
+    padding: 7px 10px;
+    font-size: 8.5px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .s5-cta-row { display: grid; grid-template-columns: 1fr 2fr; gap: 6px; margin-top: 10px; }
+  .s5-btn { font-size: 9px; font-weight: 700; text-align: center; padding: 10px; border-radius: 4px; }
+  .s5-btn.wish { border: 1.5px solid var(--accent); color: var(--accent); }
+  .s5-btn.buy { background: var(--accent); color: white; }
+
+  /* ── Dividers ── */
+  .section-divider {
+    text-align: center;
+    padding: 20px 0 8px;
+    font-size: 10px;
+    color: var(--mid);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 700px) {
+    .screens-row { gap: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-title">
+  <h1>QooBrush</h1>
+  <p>App Screen Mockups — Phase 1 MVP</p>
+</div>
+
+<div class="section-label">Screen Flow: 発見 → 選択 → 購入 → 継続</div>
+
+<!-- ═══════════════ ROW 1 ═══════════════ -->
+<div class="screens-row">
+
+  <!-- SCREEN 1: 企画展 TOP -->
+  <div class="screen-wrapper">
+    <div class="phone">
+      <div class="phone-notch"></div>
+      <div class="phone-screen" style="background:#fff;">
+        <div class="status-bar" style="background:var(--accent);color:white;">
+          <span>9:41</span>
+          <span>●●●</span>
+        </div>
+
+        <div class="s1-hero">
+          <div class="s1-hero-grid"></div>
+          <span class="s1-badge">QOOBRUSH × 男磨き</span>
+          <div class="s1-title">自分を磨く、<br>楽しさがある。</div>
+          <div class="s1-sub">ファッション・スキンケア・インテリア</div>
+        </div>
+
+        <div class="s1-content">
+          <div class="s1-honma">
+            <strong>女性100人の本音：</strong><br>
+            男性の第一印象で最も重視するのは<br>
+            「清潔感」と答えた女性が<strong>68%</strong>
+          </div>
+
+          <div style="font-size:9px;font-weight:700;color:var(--dark);margin-bottom:6px;">まず、どこから始める？</div>
+          <div class="s1-genre-row">
+            <div class="genre-chip">👔<br>ファッション</div>
+            <div class="genre-chip g2">🌿<br>スキンケア</div>
+            <div class="genre-chip g3">🛋️<br>インテリア</div>
+          </div>
+
+          <div class="s1-cta">入門商品を見る →</div>
+        </div>
+
+        <div class="nav-bar">
+          <div class="nav-icon active">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+            <span>ホーム</span>
+          </div>
+          <div class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            <span>検索</span>
+          </div>
+          <div class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+            <span>企画展</span>
+          </div>
+          <div class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            <span>マイ</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <span class="screen-caption">01 企画展 TOP</span>
+  </div>
+
+  <!-- SCREEN 2: 商品キュレーション -->
+  <div class="screen-wrapper">
+    <div class="phone">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="status-bar">
+          <span>9:41</span><span>●●●</span>
+        </div>
+
+        <div class="s2-header">
+          <div class="s2-header-title">スキンケア入門</div>
+          <div style="font-size:8px;color:var(--mid);margin-top:2px;">初心者向けキュレーション</div>
+        </div>
+        <div class="s2-tabs">
+          <div class="s2-tab active">スキンケア</div>
+          <div class="s2-tab">ファッション</div>
+          <div class="s2-tab">インテリア</div>
+        </div>
+
+        <div class="s2-section-label">まずこれだけ</div>
+        <div class="s2-product-list">
+
+          <div class="product-card">
+            <div class="product-img">🧴</div>
+            <div class="product-info">
+              <div class="product-name">酵素洗顔パウダー<span class="product-tag">入門◎</span></div>
+              <div class="product-desc">泡立て不要・毎日続けやすい<br>韓国ブランド / 30包入り</div>
+              <div class="product-price">¥2,480</div>
+            </div>
+            <div class="product-btn">購入</div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img">💧</div>
+            <div class="product-info">
+              <div class="product-name">モイスチャートナー<span class="product-tag">人気</span></div>
+              <div class="product-desc">サラッとした使い心地<br>K-Beauty / 200ml</div>
+              <div class="product-price">¥3,200</div>
+            </div>
+            <div class="product-btn">購入</div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img">☀️</div>
+            <div class="product-info">
+              <div class="product-name">UV プロテクター SPF50+</div>
+              <div class="product-desc">ノンオイル・白くならない<br>1プッシュで完了</div>
+              <div class="product-price">¥2,100</div>
+            </div>
+            <div class="product-btn">購入</div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img">💄</div>
+            <div class="product-info">
+              <div class="product-name">リップバーム 無香料</div>
+              <div class="product-desc">透明タイプ・清潔感UP</div>
+              <div class="product-price">¥680</div>
+            </div>
+            <div class="product-btn">購入</div>
+          </div>
+
+        </div>
+
+        <div style="padding:8px 14px;border-top:1px solid #f0ede8;">
+          <div style="background:var(--accent);color:white;font-size:9px;font-weight:700;text-align:center;padding:9px;border-radius:4px;">
+            🎁 3点セット ¥6,980（個別より1,200円お得）
+          </div>
+        </div>
+
+        <div class="nav-bar">
+          <div class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            <span>ホーム</span>
+          </div>
+          <div class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            <span>検索</span>
+          </div>
+          <div class="nav-icon active">
+            <svg viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+            <span>企画展</span>
+          </div>
+          <div class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg>
+            <span>マイ</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <span class="screen-caption">02 商品キュレーション</span>
+  </div>
+
+  <!-- SCREEN 3: メガ割投票 -->
+  <div class="screen-wrapper">
+    <div class="phone">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="status-bar" style="background:#1a2e40;color:white;">
+          <span>9:41</span><span>●●●</span>
+        </div>
+
+        <div class="s3-hero">
+          <div class="s3-hero-label">MEGA SALE VOTE</div>
+          <div class="s3-hero-title">メガ割投票</div>
+          <div class="s3-hero-sub">あなたの1票が割引を決める</div>
+          <div class="s3-timer">
+            <div class="s3-timer-unit">
+              <span class="s3-timer-val">11</span>
+              <span class="s3-timer-label">日</span>
+            </div>
+            <div class="s3-timer-unit">
+              <span class="s3-timer-val">08</span>
+              <span class="s3-timer-label">時間</span>
+            </div>
+            <div class="s3-timer-unit">
+              <span class="s3-timer-val">23</span>
+              <span class="s3-timer-label">分</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="s3-coupon">
+          <span style="font-size:16px;">🎫</span>
+          <div>投票するだけで<strong>10%OFF</strong>クーポンGET</div>
+        </div>
+
+        <div class="s3-content">
+          <div style="font-size:8.5px;font-weight:700;color:var(--dark);margin-bottom:6px;">スキンケア部門</div>
+
+          <div class="vote-card voted">
+            <div class="vote-img">🧴</div>
+            <div class="vote-info">
+              <div class="vote-name">クリアウォッシュ 酵素洗顔</div>
+              <div class="vote-bar-wrap"><div class="vote-bar-fill" style="width:72%"></div></div>
+              <div class="vote-count">1,254票 / 72%</div>
+            </div>
+            <div class="vote-btn voted-btn">✓</div>
+          </div>
+
+          <div class="vote-card">
+            <div class="vote-img">💧</div>
+            <div class="vote-info">
+              <div class="vote-name">アクアブースト トナー</div>
+              <div class="vote-bar-wrap"><div class="vote-bar-fill" style="width:45%"></div></div>
+              <div class="vote-count">982票 / 45%</div>
+            </div>
+            <div class="vote-btn">○</div>
+          </div>
+
+          <div class="vote-card">
+            <div class="vote-img">☀️</div>
+            <div class="vote-info">
+              <div class="vote-name">ナチュラル UV クリーム</div>
+              <div class="vote-bar-wrap"><div class="vote-bar-fill" style="width:33%"></div></div>
+              <div class="vote-count">721票 / 33%</div>
+            </div>
+            <div class="vote-btn">○</div>
+          </div>
+
+          <div style="font-size:8.5px;font-weight:700;color:var(--dark);margin:10px 0 6px;">ファッション部門</div>
+
+          <div class="vote-card">
+            <div class="vote-img">🎽</div>
+            <div class="vote-info">
+              <div class="vote-name">シンプルベルト 本革調</div>
+              <div class="vote-bar-wrap"><div class="vote-bar-fill accent2" style="width:58%;background:var(--light)"></div></div>
+              <div class="vote-count">1,106票 / 58%</div>
+            </div>
+            <div class="vote-btn">○</div>
+          </div>
+        </div>
+
+        <div class="nav-bar">
+          <div class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            <span>ホーム</span>
+          </div>
+          <div class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            <span>検索</span>
+          </div>
+          <div class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+            <span>企画展</span>
+          </div>
+          <div class="nav-icon active">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+            <span>投票</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <span class="screen-caption">03 メガ割投票</span>
+  </div>
+
+</div>
+
+<!-- ═══════════════ ROW 2 ═══════════════ -->
+<div class="section-divider">— SNS・チャレンジ & 商品詳細 —</div>
+
+<div class="screens-row">
+
+  <!-- SCREEN 4: SNS チャレンジ -->
+  <div class="screen-wrapper">
+    <div class="phone">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="status-bar"><span>9:41</span><span>●●●</span></div>
+
+        <div class="s4-header">
+          <div class="s4-title">#QooBrush1週間</div>
+          <div class="s4-new-btn">投稿する</div>
+        </div>
+
+        <div class="s4-challenge-banner">
+          <div class="s4-chall-label">CHALLENGE</div>
+          <div class="s4-chall-title">男磨き1週間<br>チャレンジ</div>
+          <div class="s4-chall-sub">企画展の商品で7日間チャレンジ<br>完走でクーポンGET</div>
+          <div class="s4-chall-btn">参加する →</div>
+        </div>
+
+        <div style="padding:6px 14px;font-size:8px;font-weight:700;color:var(--mid);">参加者の投稿</div>
+
+        <div class="s4-feed">
+          <div class="feed-card">
+            <div class="feed-user">
+              <div class="feed-avatar">T</div>
+              <div>
+                <div class="feed-name">Takuya_027</div>
+                <div class="feed-tag">#QooBrush1週間 Day 3</div>
+              </div>
+            </div>
+            <div class="feed-text">酵素洗顔3日目。もう毛穴の黒ずみが減った気がする。継続できてる自分に驚き。</div>
+            <div class="feed-stats">
+              <span>❤️ 47</span>
+              <span>💬 12</span>
+              <span>🔁 8</span>
+            </div>
+          </div>
+
+          <div class="feed-card">
+            <div class="feed-user">
+              <div class="feed-avatar" style="background:#4a6741;">K</div>
+              <div>
+                <div class="feed-name">kento.style</div>
+                <div class="feed-tag">#QooBrush1週間 Day 7</div>
+              </div>
+            </div>
+            <div class="feed-text">1週間完走！肌が明らかに変わった。友達に「なんかきれいになった？」って言われた。Qoo10すごい。</div>
+            <div class="feed-stats">
+              <span>❤️ 203</span>
+              <span>💬 38</span>
+              <span>🔁 55</span>
+            </div>
+          </div>
+
+          <div class="feed-card">
+            <div class="feed-user">
+              <div class="feed-avatar" style="background:var(--light);color:var(--dark);">Y</div>
+              <div>
+                <div class="feed-name">yuki_room</div>
+                <div class="feed-tag">#QooBrush1週間 Day 5</div>
+              </div>
+            </div>
+            <div class="feed-text">間接照明を置いただけで部屋の雰囲気が激変。彼女が来た時「なんかオシャレ」って言ってくれた。</div>
+            <div class="feed-stats">
+              <span>❤️ 124</span>
+              <span>💬 19</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-bar">
+          <div class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            <span>ホーム</span>
+          </div>
+          <div class="nav-icon active">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 22c5.52 0 10-4.48 10-10S17.52 2 12 2 2 6.48 2 12s4.48 10 10 10zm0-18c4.42 0 8 3.58 8 8s-3.58 8-8 8-8-3.58-8-8 3.58-8 8-8z"/><path d="M12 6l-4 8h8z"/></svg>
+            <span>チャレンジ</span>
+          </div>
+          <div class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+            <span>企画展</span>
+          </div>
+          <div class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg>
+            <span>マイ</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <span class="screen-caption">04 SNSチャレンジ</span>
+  </div>
+
+  <!-- SCREEN 5: 商品詳細 -->
+  <div class="screen-wrapper">
+    <div class="phone">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="status-bar"><span>9:41</span><span>●●●</span></div>
+
+        <div class="s5-img">
+          🧴
+          <div class="s5-badge">男磨き入門◎</div>
+        </div>
+
+        <div class="s5-content">
+          <div class="s5-brand">K-BEAUTY / CLEAR LAB</div>
+          <div class="s5-name">酵素洗顔パウダー<br>ディープクレンズ 30包</div>
+
+          <div class="s5-price-row">
+            <div class="s5-price">¥2,480</div>
+            <div class="s5-orig">¥3,200</div>
+            <div class="s5-disc">22% OFF</div>
+          </div>
+
+          <div class="s5-tags">
+            <span class="s5-tag">毛穴ケア</span>
+            <span class="s5-tag">泡立て不要</span>
+            <span class="s5-tag">敏感肌OK</span>
+            <span class="s5-tag">30日分</span>
+          </div>
+
+          <div class="s5-beginner">
+            ✅ <strong>初心者おすすめ理由：</strong>1包ずつ小分けで使い切りやすく、泡立て器不要。毎日の洗顔をアップグレードするだけ。
+          </div>
+
+          <div class="s5-desc">韓国発の酵素洗顔パウダー。毛穴の黒ずみや古い角質を優しく除去。週3〜毎日使用可能。1週間で肌のトーンアップを実感する声多数。</div>
+
+          <div class="s5-cta-row">
+            <div class="s5-btn wish">♡ 保存</div>
+            <div class="s5-btn buy">カートに入れる</div>
+          </div>
+        </div>
+
+        <div class="nav-bar">
+          <div class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            <span>ホーム</span>
+          </div>
+          <div class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            <span>検索</span>
+          </div>
+          <div class="nav-icon active">
+            <svg viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+            <span>企画展</span>
+          </div>
+          <div class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            <span>カート</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <span class="screen-caption">05 商品詳細</span>
+  </div>
+
+</div>
+
+<div style="text-align:center;margin-top:40px;font-size:10px;color:#aaa;letter-spacing:0.1em;">
+  QooBrush App Mockups — Phase 1 MVP — for internal review only
+</div>
+
+</body>
+</html>
